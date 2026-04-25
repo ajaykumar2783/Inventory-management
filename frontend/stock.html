@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Stock</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <div class="layout">
+      <aside class="sidebar">
+        <h2>📦 Inventory</h2>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="materials.html">Products</a>
+        <a class="active">Stock</a>
+      </aside>
+
+      <main class="main">
+        <h1>Stock Movement</h1>
+
+        <div class="panel">
+          <select id="material"></select>
+          <input type="number" id="qty" placeholder="Quantity" />
+          <button onclick="stockIn()">Stock In</button>
+          <button onclick="stockOut()">Stock Out</button>
+        </div>
+      </main>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/stock.js"></script>
+  </body>
+</html>
