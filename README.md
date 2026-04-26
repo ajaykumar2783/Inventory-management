@@ -111,6 +111,7 @@ inventory-management/
 │
 └── README.md
 
+---
 🌐 Live Demo
 
 👉 https://inventory-management11.netlify.app/login
