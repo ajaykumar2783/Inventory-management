@@ -211,7 +211,7 @@ body {
 /* PANELS */
 .dashboard-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-columns: 3fr 1fr 1fr;
   gap: 16px;
   margin-bottom: 20px;
 }
@@ -995,6 +995,7 @@ th {
 }
 .logout-btn {
   background: linear-gradient(90deg, #ef4444, #dc2626);
+  width: 100px;
   color: white;
   border: none;
   padding: 8px 14px;
