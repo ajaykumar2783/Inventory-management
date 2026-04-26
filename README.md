@@ -1,14 +1,14 @@
 <h1 align="center">📦 Inventory Management System</h1>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Full Stack Project-Flask + JS-blue?style=for-the-badge">
-  <img src="https://img.shields.io/badge/Status-Live-success?style=for-the-badge">
-  <img src="https://img.shields.io/badge/UI-Premium-purple?style=for-the-badge">
+  <img src="https://img.shields.io/badge/Full Stack-Flask + JavaScript-blue?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Status-Live-success?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/UI-Premium-purple?style=for-the-badge" />
 </p>
 
 <p align="center">
   <a href="https://inventory-management11.netlify.app/login">
-    <img src="https://img.shields.io/badge/🚀 Live Demo-Click Here-0ea5e9?style=for-the-badge">
+    <img src="https://img.shields.io/badge/🚀 Live Demo-Open App-0ea5e9?style=for-the-badge" />
   </a>
 </p>
 
@@ -16,26 +16,26 @@
 
 ## 🎯 Overview
 
-A **production-ready Inventory Management System** designed to manage materials, suppliers, stock, and analytics with a **modern dashboard UI**.
+A **modern full-stack Inventory Management System** designed to manage materials, suppliers, stock, and reports with a **clean dashboard UI**.
 
-Built to simulate a **real SaaS product experience** with clean architecture and premium frontend design.
+Built like a **real SaaS product**, not just a project.
 
 ---
 
-## ✨ Core Features
+## ✨ Features
 
 ### 📊 Dashboard
-- Real-time analytics  
-- Interactive charts (Chart.js)  
+- Real-time statistics  
+- Chart-based analytics  
 - Inventory insights  
 
 ### 📦 Inventory Management
 - Add / Edit / Delete materials  
-- Track stock levels & pricing  
+- Track quantity & pricing  
 - Low stock alerts  
 
 ### 👥 Supplier Management
-- Full CRUD operations  
+- CRUD operations  
 - Search + Pagination  
 - Modal-based UI  
 
@@ -45,12 +45,12 @@ Built to simulate a **real SaaS product experience** with clean architecture and
 
 ### 📊 Reports
 - Monthly reports  
-- Export to CSV / Excel / PDF  
+- Export (CSV / Excel / PDF)  
 
 ### 🔐 Authentication
-- Login system (multi-role)
-- Session handling  
-- Protected routes  
+- Login system  
+- Role-based access  
+- Secure session handling  
 
 ---
 
@@ -63,85 +63,66 @@ Built to simulate a **real SaaS product experience** with clean architecture and
 ---
 
 ## 🧠 System Architecture
-Frontend (HTML + CSS + JS)
-↓
-Flask API Backend
-↓
-Database (SQLite / MySQL)
 
+Frontend (HTML + CSS + JS)  
+⬇  
+Flask Backend API  
+⬇  
+Database (SQLite / MySQL)
 
 ---
 
 ## 📁 Project Structure
+
+```text
 inventory-management/
 │
 ├── backend/
-│ ├── app.py
-│ ├── models.py
-│ └── database/
+│   ├── app.py              # Main Flask application
+│   ├── models.py           # Database models
+│   ├── database/
+│   │   └── inventory.db    # SQLite database
+│   └── routes/
+│       ├── auth.py         # Authentication APIs
+│       ├── materials.py    # Materials APIs
+│       ├── suppliers.py    # Suppliers APIs
+│       ├── stock.py        # Stock APIs
+│       └── reports.py      # Reports APIs
 │
 ├── frontend/
-│ ├── dashboard.html
-│ ├── materials.html
-│ ├── suppliers.html
-│ ├── reports.html
-│ ├── login.html
-│ ├── css/
-│ └── js/
+│   ├── login.html
+│   ├── dashboard.html
+│   ├── materials.html
+│   ├── suppliers.html
+│   ├── stock.html
+│   ├── reports.html
+│   │
+│   ├── css/
+│   │   └── style.css       # Main styles
+│   │
+│   ├── js/
+│   │   ├── api.js
+│   │   ├── login.js
+│   │   ├── dashboard.js
+│   │   ├── materials.js
+│   │   ├── suppliers.js
+│   │   ├── stock.js
+│   │   └── reports.js
 │
 └── README.md
 
+🌐 Live Demo
 
----
-
-## ⚡ Live Application
-
-🌐 **Access Here:**  
 👉 https://inventory-management11.netlify.app/login
 
----
+Super Admin
+username: superadmin
+password: superadmin123
 
-## 🔑 Demo Credentials
+Admin
+username: admin
+password: admin123
 
----
-
-## 🎨 UI Highlights
-
-- Premium dashboard layout  
-- Sidebar navigation  
-- Glassmorphism login page  
-- Responsive design  
-- Smooth animations  
-
----
-
-## 📸 Preview
-
-> (Add screenshots here for more impact)
-
----
-
-## 🚀 Future Improvements
-
-- 🔐 JWT Authentication  
-- 📱 Mobile App Version  
-- 📊 Advanced BI Dashboard  
-- ☁️ Cloud Deployment (AWS)  
-- 📦 Barcode Scanner Integration  
-
----
-
-## ⭐ Project Goal
-
-This project demonstrates:
-
-- Full-stack development skills  
-- Real-world application design  
-- Clean UI/UX implementation  
-- API-based architecture  
-
----
-
-<p align="center">
-  🔥 Built like a real product, not just a project
-</p>
+User
+username: user
+password: user123
