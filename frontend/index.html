@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inventory Home</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <script>
+      const isLoggedIn =
+        localStorage.getItem("loggedIn") || sessionStorage.getItem("loggedIn");
+
+      if (!isLoggedIn) {
+        window.location.href = "login.html";
+      }
+
+      function logout() {
+        localStorage.removeItem("loggedIn");
+        sessionStorage.removeItem("loggedIn");
+        window.location.href = "login.html";
+      }
+    </script>
+
+    <!-- Navbar -->
+    <div class="navbar">
+      <h2>Inventory Management</h2>
+      <div class="nav-links">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="materials.html">Materials</a>
+        <a href="stock.html">Stock</a>
+        <a href="suppliers.html">Suppliers</a>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+      </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+      <!-- Hero Section -->
+      <div class="hero">
+        <div class="hero-text">
+          <h1>Welcome to Inventory Management System</h1>
+          <p>
+            Manage materials, suppliers, stock movement, and dashboard analytics
+            from one place in a simple and efficient way.
+          </p>
+          <div class="hero-buttons">
+            <a href="dashboard.html" class="btn-primary">Go to Dashboard</a>
+            <a href="materials.html" class="btn-secondary">Manage Materials</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Overview -->
+      <h2 class="section-title">Quick Access</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>Dashboard</h3>
+          <p class="card-text">
+            View stock summary, analytics, and recent activity.
+          </p>
+          <a href="dashboard.html" class="card-link">Open Dashboard</a>
+        </div>
+
+        <div class="card">
+          <h3>Materials</h3>
+          <p class="card-text">
+            Add, update, and manage all your inventory materials.
+          </p>
+          <a href="materials.html" class="card-link">Manage Materials</a>
+        </div>
+
+        <div class="card">
+          <h3>Stock</h3>
+          <p class="card-text">
+            Track stock levels, low stock alerts, and inventory movement.
+          </p>
+          <a href="stock.html" class="card-link">View Stock</a>
+        </div>
+
+        <div class="card">
+          <h3>Suppliers</h3>
+          <p class="card-text">
+            Store and manage supplier details for easy procurement.
+          </p>
+          <a href="suppliers.html" class="card-link">Open Suppliers</a>
+        </div>
+      </div>
+
+      <!-- Info Section -->
+      <div class="info-box">
+        <h3>Why use this system?</h3>
+        <ul>
+          <li>Easy material tracking</li>
+          <li>Better stock control</li>
+          <li>Supplier management</li>
+          <li>Simple dashboard analytics</li>
+          <li>Low stock monitoring</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>
+        © 2026 Inventory Management System | Designed for smart stock handling
+      </p>
+    </footer>
+  </body>
+</html>
