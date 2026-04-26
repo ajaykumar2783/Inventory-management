@@ -111,19 +111,37 @@ inventory-management/
 │
 └── README.md
 
+
 ---
-🌐 Live Demo
+
+## 🌐 Live Demo
 
 👉 https://inventory-management11.netlify.app/login
 
-Super Admin
-username: superadmin
-password: superadmin123
+---
 
-Admin
-username: admin
-password: admin123
+## 🔑 Demo Credentials
 
-User
-username: user
-password: user123
+---
+
+## 🎨 UI Highlights
+
+- Premium dashboard layout  
+- Sidebar navigation  
+- Glassmorphism login  
+- Smooth animations  
+
+---
+
+## 🚀 Future Improvements
+
+- JWT Authentication  
+- Mobile app version  
+- Advanced analytics  
+- Cloud deployment  
+
+---
+
+<p align="center">
+  🔥 Built like a real product, not just a project
+</p>
