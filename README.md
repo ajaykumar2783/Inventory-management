@@ -111,7 +111,7 @@ inventory-management/
 │
 └── README.md
 
-
+```
 ---
 
 ## 🌐 Live Demo
