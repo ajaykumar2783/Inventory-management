@@ -120,9 +120,6 @@ inventory-management/
 
 ---
 
-## 🔑 Demo Credentials
-
----
 
 ## 🎨 UI Highlights
 
