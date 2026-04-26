@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Inventory Dashboard</title>
     <link rel="stylesheet" href="css/style.css" />
+    <script src="js/api.js"></script>
+    <script src="js/login.js"></script>
+    <script src="js/dashboard.js"></script>
   </head>
 
   <body>
@@ -28,7 +31,7 @@
           <a href="suppliers.html">👥 Suppliers</a>
           <a href="reports.html">📊 Reports</a>
           <a href="audit_logs.html">🔔 Alerts</a>
-          <a href="#">⚙ Settings</a>
+          <a href="settings.html">⚙ Settings</a>
         </nav>
 
         <div class="user-box">
@@ -51,10 +54,23 @@
           </div>
 
           <div class="top-actions">
-            <input type="text" placeholder="Search products, SKU, barcode..." />
-            <button id="refreshBtn">⟳</button>
-            <button>🔔</button>
-            <button>☀</button>
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Search products, SKU, barcode..."
+            />
+            <button id="refreshBtn" title="Refresh">⟳</button>
+            <button title="Notifications">🔔</button>
+            <button title="Theme">☀</button>
+            <button
+              id="logoutBtn"
+              onclick="logout()"
+              class="logout-btn"
+              title="Logout"
+              style="color: red"
+            >
+              🚪 LO
+            </button>
           </div>
         </header>
 
@@ -131,7 +147,5 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="js/api.js"></script>
-    <script src="js/dashboard.js"></script>
   </body>
 </html>

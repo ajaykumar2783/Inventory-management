@@ -4,7 +4,7 @@ function hasPermission(action) {
   const permissions = {
     superadmin: ["add", "edit", "delete", "view", "settings"],
     admin: ["add", "edit", "delete", "view"],
-    user: ["view"]
+    user: ["view"],
   };
   return permissions[role] && permissions[role].includes(action);
 }
@@ -12,7 +12,9 @@ function hasPermission(action) {
 // Redirect if user doesn't have add permission
 function checkAddPermission() {
   if (!hasPermission("add")) {
-    alert("You don't have permission to add materials. Please contact an administrator.");
+    alert(
+      "You don't have permission to add materials. Please contact an administrator.",
+    );
     window.location.href = "materials.html";
     return false;
   }

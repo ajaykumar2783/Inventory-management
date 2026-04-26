@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Settings - Inventory</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/login.js"></script>
+    <script src="js/dashboard.js"></script>
+  </head>
+
+  <body>
+    <div class="layout">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-icon">📦</div>
+          <div>
+            <h2>Inventory</h2>
+            <p>Management System</p>
+          </div>
+        </div>
+
+        <nav class="menu">
+          <a href="dashboard.html">🏠 Dashboard</a>
+          <a href="materials.html">📦 Products</a>
+          <a href="stock.html">📥 Stock In</a>
+          <a href="stock.html">📤 Stock Out</a>
+          <a href="#">🧾 Orders</a>
+          <a href="suppliers.html">👥 Suppliers</a>
+          <a href="reports.html">📊 Reports</a>
+          <a href="audit_logs.html">🔔 Alerts</a>
+          <a class="active" href="settings.html">⚙ Settings</a>
+        </nav>
+
+        <div class="user-box">
+          <div class="avatar" id="userAvatar">A</div>
+          <div>
+            <h4 id="userName">Admin</h4>
+            <p id="userRole">Administrator • Online</p>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main -->
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <h1>Settings</h1>
+            <p>Manage your account and system preferences</p>
+          </div>
+
+          <div class="top-actions">
+            <button id="logoutBtn" onclick="logout()" class="logout-btn" title="Logout">🚪</button>
+          </div>
+        </header>
+
+        <!-- Settings Panels -->
+        <section class="panel">
+          <h2>Account Settings</h2>
+          <div class="form-group">
+            <label for="currentPassword">Current Password</label>
+            <input type="password" id="currentPassword" placeholder="Enter current password" />
+          </div>
+          <div class="form-group">
+            <label for="newPassword">New Password</label>
+            <input type="password" id="newPassword" placeholder="Enter new password" />
+          </div>
+          <div class="form-group">
+            <label for="confirmPassword">Confirm New Password</label>
+            <input type="password" id="confirmPassword" placeholder="Confirm new password" />
+          </div>
+          <button class="btn primary" onclick="changePassword()">Change Password</button>
+        </section>
+
+        <section class="panel">
+          <h2>System Preferences</h2>
+          <div class="form-group">
+            <label>
+              <input type="checkbox" id="notifications" checked /> Enable Notifications
+            </label>
+          </div>
+          <div class="form-group">
+            <label>
+              <input type="checkbox" id="autoRefresh" checked /> Auto-refresh Dashboard (Every 5 min)
+            </label>
+          </div>
+          <button class="btn primary" onclick="saveSettings()">Save Settings</button>
+        </section>
+
+        <section class="panel">
+          <h2>Session Information</h2>
+          <div>
+            <p><strong>Logged in as:</strong> <span id="sessionUser">--</span></p>
+            <p><strong>Role:</strong> <span id="sessionRole">--</span></p>
+            <p><strong>Session Timeout:</strong> 30 minutes of inactivity</p>
+            <p id="sessionWarning" style="color: #f59e0b; display: none; margin-top: 10px;">⚠️ Your session will expire soon due to inactivity.</p>
+            <button class="btn secondary" onclick="logout()" style="margin-top: 10px;">Logout Now</button>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      // Check login on page load
+      if (!checkLogin()) {
+        window.location.href = "login.html";
+      }
+
+      // Apply role-based access
+      applyRoleBasedAccess();
+
+      // Load session info
+      document.getElementById("sessionUser").textContent = getUserName();
+      document.getElementById("sessionRole").textContent = getUserRole().toUpperCase();
+
+      function changePassword() {
+        const current = document.getElementById("currentPassword").value;
+        const newPass = document.getElementById("newPassword").value;
+        const confirm = document.getElementById("confirmPassword").value;
+
+        if (!current || !newPass || !confirm) {
+          alert("❌ Please fill all fields");
+          return;
+        }
+
+        if (newPass.length < 6) {
+          alert("❌ New password must be at least 6 characters");
+          return;
+        }
+
+        if (newPass !== confirm) {
+          alert("❌ New passwords don't match");
+          return;
+        }
+
+        // In production, this would call an API to verify current password and change it
+        localStorage.setItem("passwordChanged", new Date().toISOString());
+        alert("✅ Password changed successfully!");
+        document.getElementById("currentPassword").value = "";
+        document.getElementById("newPassword").value = "";
+        document.getElementById("confirmPassword").value = "";
+      }
+
+      function saveSettings() {
+        const notifications = document.getElementById("notifications").checked;
+        const autoRefresh = document.getElementById("autoRefresh").checked;
+
+        localStorage.setItem("notifications", notifications);
+        localStorage.setItem("autoRefresh", autoRefresh);
+
+        alert("✅ Settings saved successfully!");
+      }
+
+      // Load settings on page load
+      document.addEventListener("DOMContentLoaded", () => {
+        document.getElementById("notifications").checked = localStorage.getItem("notifications") !== "false";
+        document.getElementById("autoRefresh").checked = localStorage.getItem("autoRefresh") !== "false";
+      });
+
+      // Setup auto-logout warning
+      setTimeout(() => {
+        const timeLeft = parseInt(localStorage.getItem(AUTH_EXPIRY_KEY)) - Date.now();
+        if (timeLeft > 0 && timeLeft < 5 * 60 * 1000) { // Less than 5 minutes
+          document.getElementById("sessionWarning").style.display = "block";
+        }
+      }, 1000);
+
+      // Apply production-level auth on settings page
+      setupSessionTimeout();
+      addActivityListeners();
+    </script>
+  </body>
+</html>

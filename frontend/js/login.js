@@ -122,37 +122,48 @@ function loginEnhanced() {
   // Check if account is locked
   if (isAccountLocked(username)) {
     error.innerText = "Account locked due to multiple failed attempts. Try again later.";
-    console.warn(`Account locked: ${username}`);
     return;
   }
 
-  // Authenticate user
-  if (USERS[username] && USERS[username].password === password) {
-    const token = generateToken(username);
-    const expiry = Date.now() + SESSION_TIMEOUT;
-
-    // Store secure session data
-    localStorage.setItem("loggedIn", "true");
-    localStorage.setItem("username", username);
-    localStorage.setItem("userRole", USERS[username].role);
-    localStorage.setItem("userName", USERS[username].name);
-    localStorage.setItem(AUTH_TOKEN_KEY, token);
-    localStorage.setItem(AUTH_EXPIRY_KEY, expiry.toString());
-    localStorage.setItem("loginTime", new Date().toISOString());
-
-    // Clear failed attempts
-    clearFailedAttempts(username);
-
-    // Log successful login
-    console.info(`User logged in: ${username} (${USERS[username].role})`);
-
-    // Redirect to dashboard
-    window.location.href = "dashboard.html";
-  } else {
-    recordFailedAttempt(username);
-    error.innerText = "Invalid username or password";
-    console.warn(`Failed login attempt for user: ${username}`);
+  // Show loading state
+  const btnText = document.getElementById("btnText");
+  const spinner = document.getElementById("spinner");
+  if (btnText && spinner) {
+    btnText.innerText = "Logging in...";
+    spinner.style.display = "inline-block";
   }
+
+  // Simulate processing delay for better UX
+  setTimeout(() => {
+    // Authenticate user
+    if (USERS[username] && USERS[username].password === password) {
+      const token = generateToken(username);
+      const expiry = Date.now() + SESSION_TIMEOUT;
+
+      // Store secure session data
+      localStorage.setItem("loggedIn", "true");
+      localStorage.setItem("username", username);
+      localStorage.setItem("userRole", USERS[username].role);
+      localStorage.setItem("userName", USERS[username].name);
+      localStorage.setItem(AUTH_TOKEN_KEY, token);
+      localStorage.setItem(AUTH_EXPIRY_KEY, expiry.toString());
+      localStorage.setItem("loginTime", new Date().toISOString());
+
+      // Clear failed attempts
+      clearFailedAttempts(username);
+
+      window.location.href = "dashboard.html";
+    } else {
+      recordFailedAttempt(username);
+      error.innerText = "Invalid username or password";
+
+      // Reset button state
+      if (btnText && spinner) {
+        btnText.innerText = "Login";
+        spinner.style.display = "none";
+      }
+    }
+  }, 1000);
 }
 
 // Validate login session integrity
@@ -162,7 +173,6 @@ function checkLogin() {
   const username = localStorage.getItem("username");
 
   if (!loggedIn || !token || !username) {
-    logout();
     return false;
   }
 
@@ -199,13 +209,6 @@ function resetSessionTimeout() {
 
 // Secure logout with full session cleanup
 function logout() {
-  const username = localStorage.getItem("username");
-  
-  // Log logout event
-  if (username) {
-    console.info(`User logged out: ${username}`);
-  }
-
   // Clear all sensitive data
   localStorage.removeItem("loggedIn");
   localStorage.removeItem("username");
@@ -220,5 +223,5 @@ function logout() {
   window.location.href = "login.html";
 }
 
-// Use enhanced login function
-const login = loginEnhanced;
+// Override basic login with enhanced version
+login = loginEnhanced;

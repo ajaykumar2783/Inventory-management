@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login - Inventory</title>
+    <script src="js/login.js"></script>
 
     <style>
       /* RESET */
@@ -223,45 +224,10 @@
     </div>
 
     <script>
-      const USERS = {
-        superadmin: { password: "superadmin123" },
-        admin: { password: "admin123" },
-        user: { password: "user123" },
-      };
-
+      // Toggle password visibility
       function togglePassword() {
         const pass = document.getElementById("password");
         pass.type = pass.type === "password" ? "text" : "password";
-      }
-
-      function login() {
-        const user = document.getElementById("username").value.trim();
-        const pass = document.getElementById("password").value;
-        const error = document.getElementById("loginError");
-
-        const btnText = document.getElementById("btnText");
-        const spinner = document.getElementById("spinner");
-
-        error.innerText = "";
-
-        if (!user || !pass) {
-          error.innerText = "Enter username & password";
-          return;
-        }
-
-        btnText.innerText = "Logging in...";
-        spinner.style.display = "inline-block";
-
-        setTimeout(() => {
-          if (USERS[user] && USERS[user].password === pass) {
-            localStorage.setItem("loggedIn", "true");
-            window.location.href = "dashboard.html";
-          } else {
-            error.innerText = "Invalid credentials";
-            btnText.innerText = "Login";
-            spinner.style.display = "none";
-          }
-        }, 1000);
       }
     </script>
   </body>

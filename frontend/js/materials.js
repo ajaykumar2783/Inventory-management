@@ -8,7 +8,8 @@ async function loadMaterials() {
     tbody.innerHTML = "";
 
     if (data.length === 0) {
-      tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">No materials found</td></tr>';
+      tbody.innerHTML =
+        '<tr><td colspan="5" style="text-align:center;">No materials found</td></tr>';
       return;
     }
 
@@ -29,7 +30,8 @@ async function loadMaterials() {
     });
   } catch (error) {
     console.error("Materials loading error:", error);
-    document.getElementById("materialsTable").innerHTML = '<tr><td colspan="5" style="text-align:center; color:red;">Failed to load materials. Make sure the backend is running.</td></tr>';
+    document.getElementById("materialsTable").innerHTML =
+      '<tr><td colspan="5" style="text-align:center; color:red;">Failed to load materials. Make sure the backend is running.</td></tr>';
   }
 }
 

@@ -29,24 +29,26 @@
           const res = await fetch(API_BASE + "/materials");
           if (!res.ok) throw new Error("Failed to load materials");
           const data = await res.json();
-          
+
           const list = document.getElementById("alerts");
           const lowStockItems = data.filter((m) => m.quantity <= m.min_stock);
-          
+
           if (lowStockItems.length === 0) {
-            list.innerHTML = '<li style="color: green;">✓ All items are in stock</li>';
+            list.innerHTML =
+              '<li style="color: green;">✓ All items are in stock</li>';
             return;
           }
-          
+
           lowStockItems.forEach((m) => {
             list.innerHTML += `<li style="color: #f59e0b;">⚠ ${m.material_name} - Current: ${m.quantity}, Min: ${m.min_stock}</li>`;
           });
         } catch (error) {
           console.error("Load alerts error:", error);
-          document.getElementById("alerts").innerHTML = '<li style="color: red;">Failed to load alerts. Make sure the backend is running.</li>';
+          document.getElementById("alerts").innerHTML =
+            '<li style="color: red;">Failed to load alerts. Make sure the backend is running.</li>';
         }
       }
-      
+
       loadAlerts();
     </script>
   </body>

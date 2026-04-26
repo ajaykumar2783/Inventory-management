@@ -10,24 +10,93 @@
       <aside class="sidebar">
         <h2>📦 Inventory</h2>
         <a href="dashboard.html">Dashboard</a>
-        <a class="active">Reports</a>
+        <a href="materials.html">Products</a>
+        <a href="stock.html">Stock</a>
+        <a href="suppliers.html">Suppliers</a>
+        <a class="active" href="reports.html">Reports</a>
       </aside>
 
       <main class="main">
-        <h1>Reports</h1>
+        <div class="topbar">
+          <div>
+            <h1>Monthly Reports</h1>
+            <p>Generate and export inventory reports month-wise</p>
+          </div>
+        </div>
+
+        <div class="panel report-filter">
+          <div>
+            <label>Select Month</label>
+            <input type="month" id="reportMonth" />
+          </div>
+
+          <button onclick="generateReport()" class="add-btn">
+            Generate Report
+          </button>
+          <button onclick="exportCSV()" class="export-btn">Export CSV</button>
+          <button onclick="exportExcel()" class="export-btn excel">
+            Export Excel
+          </button>
+          <button onclick="exportPDF()" class="export-btn pdf">
+            Export PDF
+          </button>
+        </div>
 
         <div class="stats">
           <div class="stat-card">
-            <h3>Total Sales</h3>
-            <h2>₹1,25,000</h2>
+            <div>
+              <p>Total Materials</p>
+              <h2 id="totalMaterials">0</h2>
+            </div>
           </div>
 
           <div class="stat-card">
-            <h3>Total Profit</h3>
-            <h2>₹30,000</h2>
+            <div>
+              <p>Total Stock Value</p>
+              <h2 id="totalValue">₹0</h2>
+            </div>
           </div>
+
+          <div class="stat-card">
+            <div>
+              <p>Low Stock Items</p>
+              <h2 id="lowStock">0</h2>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div>
+              <p>Out of Stock</p>
+              <h2 id="outStock">0</h2>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-title">
+            <h3>Monthly Inventory Report</h3>
+            <span id="selectedMonthText">Current Month</span>
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Material</th>
+                <th>Type</th>
+                <th>Quantity</th>
+                <th>Min Stock</th>
+                <th>Unit Price</th>
+                <th>Total Value</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="reportTable"></tbody>
+          </table>
         </div>
       </main>
     </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/reports.js"></script>
   </body>
 </html>

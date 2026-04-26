@@ -4,7 +4,7 @@ function hasPermission(action) {
   const permissions = {
     superadmin: ["add", "edit", "delete", "view", "settings"],
     admin: ["add", "edit", "delete", "view"],
-    user: ["view"]
+    user: ["view"],
   };
   return permissions[role] && permissions[role].includes(action);
 }
@@ -49,8 +49,8 @@ async function stockIn() {
         material_id: parseInt(materialId),
         movement_type: "IN",
         quantity: parseFloat(quantity),
-        remarks: "Stock received"
-      })
+        remarks: "Stock received",
+      }),
     });
 
     const result = await res.json();
@@ -89,8 +89,8 @@ async function stockOut() {
         material_id: parseInt(materialId),
         movement_type: "OUT",
         quantity: parseFloat(quantity),
-        remarks: "Stock issued"
-      })
+        remarks: "Stock issued",
+      }),
     });
 
     const result = await res.json();

@@ -41,6 +41,7 @@ body {
   text-decoration: none;
   transition: 0.25s;
   font-size: 14px;
+  cursor: pointer;
 }
 
 .sidebar a:hover,
@@ -81,6 +82,8 @@ body {
 
 .top-actions input {
   width: 280px;
+  flex: 1;
+  max-width: 350px;
 }
 
 .top-actions input,
@@ -92,10 +95,19 @@ body {
   padding: 0 12px;
   outline: none;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  font-size: 14px;
+  transition: 0.25s;
+}
+
+.top-actions input:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
 }
 
 .top-actions button {
   cursor: pointer;
+  width: 40px;
+  padding: 0;
 }
 
 /* STATS */
@@ -981,57 +993,87 @@ th {
     grid-template-columns: 1fr;
   }
 }
-/* ACTION BUTTONS */
-.edit {
-  background: #3b82f6;
+.logout-btn {
+  background: linear-gradient(90deg, #ef4444, #dc2626);
   color: white;
   border: none;
-  padding: 6px 10px;
-  border-radius: 6px;
-  margin-right: 5px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
 }
 
-.delete {
-  background: #ef4444;
-  color: white;
-  border: none;
-  padding: 6px 10px;
-  border-radius: 6px;
+.logout-btn:hover {
+  transform: translateY(-2px);
+}
+.report-filter {
+  display: grid;
+  grid-template-columns: 1.3fr repeat(4, auto);
+  gap: 12px;
+  align-items: end;
+  margin-bottom: 20px;
 }
 
-/* MODAL */
-.modal {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.4);
-  justify-content: center;
-  align-items: center;
+.report-filter label {
+  display: block;
+  font-size: 13px;
+  color: #64748b;
+  margin-bottom: 6px;
+  font-weight: 600;
 }
 
-.modal-box {
-  background: white;
-  padding: 25px;
-  border-radius: 12px;
-  width: 300px;
-}
-
-.modal-box input {
+.report-filter input {
   width: 100%;
-  margin: 10px 0;
-  padding: 10px;
+  height: 42px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 0 12px;
+  outline: none;
 }
 
-.cancel {
-  background: gray;
+.export-btn {
+  background: #0ea5e9;
+  color: white;
+  border: none;
+  padding: 11px 15px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
 }
 
-/* PAGINATION */
-#pagination {
-  margin-top: 15px;
+.export-btn.excel {
+  background: #16a34a;
 }
 
-#pagination button {
-  margin: 2px;
-  padding: 6px 10px;
+.export-btn.pdf {
+  background: #dc2626;
+}
+
+@media print {
+  .sidebar,
+  .topbar,
+  .report-filter {
+    display: none;
+  }
+
+  .main {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  body {
+    background: white;
+  }
+
+  .panel,
+  .stat-card {
+    box-shadow: none;
+    border: 1px solid #ddd;
+  }
+}
+
+@media (max-width: 900px) {
+  .report-filter {
+    grid-template-columns: 1fr;
+  }
 }

@@ -1,6 +1,11 @@
 let charts = {};
 let allMaterials = []; // Store all materials for search
 
+// Check login on page load
+if (!checkLogin()) {
+  window.location.href = "login.html";
+}
+
 // Get current user role
 function getUserRole() {
   return localStorage.getItem("userRole") || "user";
@@ -133,6 +138,7 @@ function loadProductTable(data) {
   if (!tbody) return;
   
   tbody.innerHTML = "";
+  allMaterials = []; // Reset
   
   if (!data.material_names || data.material_names.length === 0) {
     tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">No products available</td></tr>';
@@ -143,6 +149,14 @@ function loadProductTable(data) {
     let status = "stock";
     if (data.material_quantities[i] <= 0) status = "out";
     else if (data.material_quantities[i] <= 10) status = "low"; // assuming min_stock is 10 for display
+
+    // Store material data for search
+    allMaterials.push({
+      name: data.material_names[i],
+      type: "Material",
+      quantity: data.material_quantities[i],
+      status: status
+    });
 
     tbody.innerHTML += `
       <tr>
@@ -243,8 +257,65 @@ function createStatusChart(statusSummary) {
   });
 }
 
+// Search functionality
+function initSearch() {
+  const searchInput = document.getElementById("searchInput");
+  if (!searchInput) return;
+
+  searchInput.addEventListener("input", (e) => {
+    const searchTerm = e.target.value.toLowerCase().trim();
+    const tbody = document.getElementById("productTableBody");
+
+    if (!tbody) return;
+
+    tbody.innerHTML = "";
+
+    if (searchTerm === "") {
+      // Show all materials
+      allMaterials.forEach(material => {
+        tbody.innerHTML += generateMaterialRow(material);
+      });
+    } else {
+      // Filter and show matching materials
+      const filtered = allMaterials.filter(material => 
+        material.name.toLowerCase().includes(searchTerm) ||
+        material.type.toLowerCase().includes(searchTerm) ||
+        material.status.toLowerCase().includes(searchTerm)
+      );
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color: #ef4444;">No products found matching "${searchTerm}"</td></tr>`;
+      } else {
+        filtered.forEach(material => {
+          tbody.innerHTML += generateMaterialRow(material);
+        });
+      }
+    }
+  });
+}
+
+// Helper function to generate table row
+function generateMaterialRow(material) {
+  return `
+    <tr>
+      <td>${material.name}</td>
+      <td>${material.type}</td>
+      <td>${material.quantity}</td>
+      <td><span class="status ${material.status}">${material.status}</span></td>
+      <td>
+        <button class="btn small edit-btn" onclick="editMaterial('${material.name}')">Edit</button>
+        <button class="btn small delete-btn" onclick="deleteMaterial('${material.name}')">Delete</button>
+      </td>
+    </tr>
+  `;
+}
+
 document.getElementById("refreshBtn")?.addEventListener("click", loadDashboard);
 
 // Apply role-based access when page loads
 applyRoleBasedAccess();
-loadDashboard();
+loadDashboard().then(() => {
+  initSearch();
+  setupSessionTimeout();
+  addActivityListeners();
+});
