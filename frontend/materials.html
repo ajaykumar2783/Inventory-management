@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Products</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <div class="layout">
+      <!-- Sidebar (same as dashboard) -->
+      <aside class="sidebar">
+        <h2>📦 Inventory</h2>
+        <a href="dashboard.html">Dashboard</a>
+        <a class="active">Products</a>
+        <a href="stock.html">Stock</a>
+        <a href="suppliers.html">Suppliers</a>
+      </aside>
+
+      <main class="main">
+        <div class="topbar">
+          <h1>Products</h1>
+          <a href="add-material.html" class="add-btn">+ Add Product</a>
+        </div>
+
+        <div class="panel">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Qty</th>
+                <th>Price</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="materialsTable"></tbody>
+          </table>
+        </div>
+      </main>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/materials.js"></script>
+  </body>
+</html>

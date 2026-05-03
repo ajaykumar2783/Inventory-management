@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Suppliers</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <div class="layout">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <h2>📦 Inventory</h2>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="materials.html">Products</a>
+        <a class="active">Suppliers</a>
+        <a href="#" onclick="logout()">🚪 Logout</a>
+      </aside>
+
+      <!-- Main -->
+      <main class="main">
+        <!-- Topbar -->
+        <div class="topbar">
+          <h1>Suppliers</h1>
+
+          <div class="top-actions">
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Search supplier..."
+            />
+            <button class="add-btn" onclick="openModal()">+ Add</button>
+          </div>
+        </div>
+
+        <!-- Table -->
+        <div class="panel">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Contact</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="supplierTable"></tbody>
+          </table>
+
+          <div id="pagination"></div>
+        </div>
+      </main>
+    </div>
+
+    <!-- MODAL -->
+    <div id="supplierModal" class="modal">
+      <div class="modal-box">
+        <h2 id="modalTitle">Add Supplier</h2>
+
+        <input id="supplierName" placeholder="Supplier Name" />
+        <input id="supplierContact" placeholder="Contact" />
+
+        <button onclick="saveSupplier()">Save</button>
+        <button onclick="closeModal()" class="cancel">Cancel</button>
+      </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/suppliers.js"></script>
+  </body>
+</html>

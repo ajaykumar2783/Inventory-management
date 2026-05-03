@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Alerts</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <div class="layout">
+      <aside class="sidebar">
+        <h2>📦 Inventory</h2>
+        <a href="dashboard.html">Dashboard</a>
+        <a class="active">Alerts</a>
+      </aside>
+
+      <main class="main">
+        <h1>Low Stock Alerts</h1>
+
+        <div class="panel">
+          <ul id="alerts"></ul>
+        </div>
+      </main>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script>
+      async function loadAlerts() {
+        try {
+          const res = await fetch(API_BASE + "/materials");
+          if (!res.ok) throw new Error("Failed to load materials");
+          const data = await res.json();
+
+          const list = document.getElementById("alerts");
+          const lowStockItems = data.filter((m) => m.quantity <= m.min_stock);
+
+          if (lowStockItems.length === 0) {
+            list.innerHTML =
+              '<li style="color: green;">✓ All items are in stock</li>';
+            return;
+          }
+
+          lowStockItems.forEach((m) => {
+            list.innerHTML += `<li style="color: #f59e0b;">⚠ ${m.material_name} - Current: ${m.quantity}, Min: ${m.min_stock}</li>`;
+          });
+        } catch (error) {
+          console.error("Load alerts error:", error);
+          document.getElementById("alerts").innerHTML =
+            '<li style="color: red;">Failed to load alerts. Make sure the backend is running.</li>';
+        }
+      }
+
+      loadAlerts();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inventory Dashboard</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/api.js"></script>
+    <script src="js/login.js"></script>
+    <script src="js/dashboard.js"></script>
+  </head>
+
+  <body>
+    <div class="layout">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-icon">📦</div>
+          <div>
+            <h2>Inventory</h2>
+            <p>Management System</p>
+          </div>
+        </div>
+
+        <nav class="menu">
+          <a class="active" href="dashboard.html">🏠 Dashboard</a>
+          <a href="materials.html">📦 Products</a>
+          <a href="stock.html">📥 Stock In</a>
+          <a href="stock.html">📤 Stock Out</a>
+          <a href="#">🧾 Orders</a>
+          <a href="suppliers.html">👥 Suppliers</a>
+          <a href="reports.html">📊 Reports</a>
+          <a href="audit_logs.html">🔔 Alerts</a>
+          <a href="settings.html">⚙ Settings</a>
+        </nav>
+
+        <div class="user-box">
+          <div class="avatar" id="userAvatar">A</div>
+          <div>
+            <h4 id="userName">Admin</h4>
+            <p id="userRole">Administrator • Online</p>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main -->
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <h1>Dashboard</h1>
+            <p id="welcomeMsg">
+              Welcome back, Admin! 👋 Here's today's inventory overview.
+            </p>
+          </div>
+
+          <div class="top-actions">
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Search products, SKU, barcode..."
+            />
+            <button id="refreshBtn" title="Refresh">⟳</button>
+            <button title="Notifications">🔔</button>
+            <button title="Theme">☀</button>
+            <button
+              id="logoutBtn"
+              onclick="logout()"
+              class="logout-btn"
+              title="Logout"
+              style="color: red"
+            >
+              Log <br />
+              Out
+            </button>
+          </div>
+        </header>
+
+        <!-- Stats -->
+        <section class="stats" id="dashboardCards"></section>
+
+        <!-- Quick Actions -->
+        <section class="quick-actions">
+          <a href="stock.html" class="quick-card green"
+            >📥 <b>Stock In</b><span>Add New Stock</span></a
+          >
+          <a href="stock.html" class="quick-card red"
+            >📤 <b>Stock Out</b><span>Remove / Issue</span></a
+          >
+          <a href="add-material.html" class="quick-card blue"
+            >➕ <b>New Product</b><span>Add New Product</span></a
+          >
+          <a href="#" class="quick-card purple"
+            >🛒 <b>New Order</b><span>Create New Order</span></a
+          >
+          <a href="suppliers.html" class="quick-card cyan"
+            >👥 <b>Suppliers</b><span>Manage Suppliers</span></a
+          >
+        </section>
+
+        <!-- Charts -->
+        <section class="dashboard-grid">
+          <div class="panel stock-panel">
+            <div class="panel-title">
+              <h3>Stock Overview</h3>
+              <span>This Month</span>
+            </div>
+            <canvas id="stockChart"></canvas>
+          </div>
+
+          <div class="panel">
+            <div class="panel-title">
+              <h3>Recent Activities</h3>
+              <a href="#">View All</a>
+            </div>
+            <ul class="activities" id="activityList"></ul>
+          </div>
+
+          <div class="panel">
+            <div class="panel-title">
+              <h3>Low Stock Overview</h3>
+            </div>
+            <canvas id="statusChart"></canvas>
+            <a class="outline-btn" href="audit_logs.html">View All Alerts</a>
+          </div>
+        </section>
+
+        <!-- Products -->
+        <section class="panel product-panel">
+          <div class="panel-title">
+            <h3>Products</h3>
+            <a class="add-btn" href="add-material.html">+ Add Product</a>
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Category</th>
+                <th>Stock</th>
+                <th>Price</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="productTableBody"></tbody>
+          </table>
+        </section>
+      </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </body>
+</html>
