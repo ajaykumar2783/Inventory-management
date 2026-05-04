@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Inventory Management System</title>
+    <script src="js/login.js"></script>
+
+    <style>
+      /* RESET */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter", Arial, sans-serif;
+      }
+
+      body {
+        min-height: 100vh;
+        display: flex;
+        background: linear-gradient(135deg, #0f172a, #1e1b4b);
+      }
+
+      /* CONTAINER */
+      .login-container {
+        display: flex;
+        width: 85%;
+        max-width: 900px;
+        height: 500px;
+        margin: auto;
+        border-radius: 30px;
+        overflow: hidden;
+        box-shadow: 0 40px 100px rgba(0, 0, 0, 0.4);
+      }
+
+      /* LEFT SECTION - PROJECT INFO */
+      .project-section {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px 20px;
+        color: white;
+        position: relative;
+        overflow-y: auto;
+        overflow-x: hidden;
+      }
+
+      .project-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background:
+          radial-gradient(
+            circle at 20% 20%,
+            rgba(99, 102, 241, 0.3),
+            transparent 40%
+          ),
+          radial-gradient(
+            circle at 80% 80%,
+            rgba(14, 165, 233, 0.2),
+            transparent 40%
+          );
+        pointer-events: none;
+      }
+
+      .project-content {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        animation: fadeInLeft 0.8s ease;
+      }
+
+      @keyframes fadeInLeft {
+        from {
+          opacity: 0;
+          transform: translateX(-30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      .project-logo {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 15px;
+        border-radius: 20px;
+        background: linear-gradient(135deg, #6366f1, #22c55e);
+        display: grid;
+        place-items: center;
+        font-size: 40px;
+        color: white;
+        box-shadow: 0 30px 60px rgba(99, 102, 241, 0.5);
+        animation: float 3s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-15px);
+        }
+      }
+
+      .project-title {
+        font-size: 28px;
+        font-weight: 900;
+        margin-bottom: 5px;
+        background: linear-gradient(90deg, #6366f1, #22c55e);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .project-subtitle {
+        font-size: 13px;
+        font-weight: 600;
+        margin-bottom: 10px;
+        color: #cbd5e1;
+      }
+
+      .project-description {
+        font-size: 13px;
+        line-height: 1.6;
+        color: #e2e8f0;
+        max-width: 380px;
+        margin: 0 auto 20px;
+      }
+
+      .project-features {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 15px;
+      }
+
+      .feature {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 13px;
+        color: #cbd5e1;
+      }
+
+      .feature-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: rgba(99, 102, 241, 0.2);
+        display: grid;
+        place-items: center;
+        font-size: 16px;
+        flex-shrink: 0;
+      }
+
+      /* RIGHT SECTION - LOGIN FORM */
+      .login-section {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 40px;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+      }
+
+      .login-box {
+        width: 100%;
+        max-width: 380px;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 30px;
+        border-radius: 26px;
+        text-align: center;
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+        animation: fadeInRight 0.8s ease;
+      }
+
+      @keyframes fadeInRight {
+        from {
+          opacity: 0;
+          transform: translateX(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      /* BRANDING */
+      .login-brand {
+        margin-bottom: 20px;
+      }
+
+      .login-brand h2 {
+        font-size: 22px;
+        font-weight: 800;
+        background: linear-gradient(90deg, #6366f1, #22c55e);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 5px;
+      }
+
+      .login-brand p {
+        font-size: 12px;
+        color: #64748b;
+        letter-spacing: 0.5px;
+      }
+
+      /* INPUTS */
+      .input-group {
+        margin-bottom: 12px;
+      }
+
+      input {
+        width: 100%;
+        height: 44px;
+        border-radius: 12px;
+        border: 1px solid #e5e7eb;
+        padding: 0 12px;
+        font-size: 13px;
+        background: #f8fafc;
+        outline: none;
+        transition: 0.3s;
+      }
+
+      input:focus {
+        border-color: #6366f1;
+        background: white;
+        box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+      }
+
+      /* PASSWORD ICON */
+      .password-box {
+        position: relative;
+      }
+
+      .toggle-password {
+        position: absolute;
+        right: 12px;
+        top: 14px;
+        cursor: pointer;
+        font-size: 18px;
+      }
+
+      /* OPTIONS */
+      .login-options {
+        text-align: left;
+        font-size: 12px;
+        margin-bottom: 15px;
+        color: #475569;
+      }
+
+      .login-options input {
+        width: auto;
+        height: auto;
+        margin-right: 6px;
+      }
+
+      /* BUTTON */
+      button {
+        width: 100%;
+        height: 42px;
+        border-radius: 12px;
+        border: none;
+        font-weight: bold;
+        font-size: 14px;
+        color: white;
+        cursor: pointer;
+        background: linear-gradient(90deg, #6366f1, #4f46e5);
+        box-shadow: 0 15px 30px rgba(99, 102, 241, 0.4);
+        transition: 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+      }
+
+      button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 20px 40px rgba(99, 102, 241, 0.5);
+      }
+
+      button:active {
+        transform: translateY(0);
+      }
+
+      /* SPINNER */
+      .spinner {
+        display: none;
+        width: 16px;
+        height: 16px;
+        border: 3px solid white;
+        border-top: 3px solid transparent;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* ERROR */
+      #loginError {
+        margin-top: 15px;
+        font-size: 13px;
+        color: #ef4444;
+        min-height: 20px;
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 768px) {
+        .login-container {
+          flex-direction: column;
+          width: 95%;
+          max-width: 100%;
+          height: auto;
+          margin: 20px auto;
+        }
+
+        .project-section {
+          padding: 30px 20px;
+          min-height: auto;
+        }
+
+        .project-logo {
+          width: 80px;
+          height: 80px;
+          font-size: 40px;
+        }
+
+        .project-title {
+          font-size: 32px;
+        }
+
+        .project-subtitle {
+          font-size: 18px;
+        }
+
+        .project-description {
+          font-size: 14px;
+        }
+
+        .project-features {
+          display: none;
+        }
+
+        .login-section {
+          min-height: auto;
+          background: rgba(255, 255, 255, 0.1);
+          padding: 30px 20px;
+        }
+
+        .login-box {
+          max-width: 100%;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="login-container">
+      <!-- LEFT SECTION - PROJECT INFO -->
+      <section class="project-section">
+        <div class="project-content">
+          <div class="project-logo">📦</div>
+          <h1 class="project-title">Inventory Pro</h1>
+          <p class="project-subtitle">Smart Stock Management System</p>
+          
+          <p class="project-description">
+            Streamline your inventory operations with our comprehensive management system. Track stock levels, manage suppliers, generate insightful reports, and maintain audit logs—all in one powerful platform.
+          </p>
+
+          <div class="project-features">
+            <div class="feature">
+              <div class="feature-icon">📊</div>
+              <span>Real-time Dashboard & Analytics</span>
+            </div>
+            <div class="feature">
+              <div class="feature-icon">🎯</div>
+              <span>Precise Stock Tracking</span>
+            </div>
+            <div class="feature">
+              <div class="feature-icon">👥</div>
+              <span>Supplier Management</span>
+            </div>
+            <div class="feature">
+              <div class="feature-icon">📈</div>
+              <span>Advanced Reporting</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- RIGHT SECTION - LOGIN FORM -->
+      <section class="login-section">
+        <div class="login-box">
+          <!-- BRAND -->
+          <div class="login-brand">
+            <h2>Welcome Back</h2>
+            <p>Sign in to your account</p>
+          </div>
+
+          <!-- INPUTS -->
+          <div class="input-group">
+            <input type="text" id="username" placeholder="Username or Email" />
+          </div>
+
+          <div class="input-group password-box">
+            <input type="password" id="password" placeholder="Password" />
+            <span class="toggle-password" onclick="togglePassword()">👁</span>
+          </div>
+
+          <div class="login-options">
+            <label><input type="checkbox" id="remember" /> Remember me</label>
+          </div>
+
+          <!-- BUTTON -->
+          <button onclick="login()">
+            <span id="btnText">Login</span>
+            <span class="spinner" id="spinner"></span>
+          </button>
+
+          <p id="loginError"></p>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      // Toggle password visibility
+      function togglePassword() {
+        const pass = document.getElementById("password");
+        pass.type = pass.type === "password" ? "text" : "password";
+      }
+    </script>
+  </body>
+</html>

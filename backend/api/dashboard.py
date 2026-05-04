@@ -13,12 +13,14 @@ def dashboard_data():
     material_names = []
     material_quantities = []
     material_values = []
+    material_ids = []
 
     for m in materials:
         type_summary[m.material_type] = type_summary.get(m.material_type, 0) + 1
         material_names.append(m.material_name)
         material_quantities.append(m.quantity)
         material_values.append(round(m.quantity * m.unit_price, 2))
+        material_ids.append(m.id)
 
     stock_status_summary = {
         "In Stock": in_stock_count,
@@ -37,5 +39,6 @@ def dashboard_data():
         "material_names": material_names,
         "material_quantities": material_quantities,
         "material_values": material_values,
+        "material_ids": material_ids,
         "recent_movements": [mv.to_dict() for mv in movements]
     })

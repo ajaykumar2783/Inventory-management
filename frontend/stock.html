@@ -3,6 +3,153 @@
   <head>
     <title>Stock</title>
     <link rel="stylesheet" href="css/style.css" />
+    <style>
+      /* RESET */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      /* BODY */
+      body {
+        background: #f8fafc; /* light background */
+        color: #1e293b;
+      }
+
+      /* LAYOUT */
+      .layout {
+        display: flex;
+        height: 100vh;
+      }
+
+      /* SIDEBAR (BLUE) */
+      .sidebar {
+        width: 230px;
+        background: linear-gradient(180deg, #071129, #0d1d50);
+        padding: 25px 15px;
+        color: #fff;
+      }
+
+      .sidebar h2 {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #fff;
+      }
+
+      /* SIDEBAR LINKS */
+      .sidebar a {
+        display: block;
+        padding: 12px 15px;
+        margin: 8px 0;
+        text-decoration: none;
+        color: #dbeafe;
+        border-radius: 8px;
+        transition: 0.3s;
+      }
+
+      .sidebar a:hover {
+        background: rgba(255, 255, 255, 0.2);
+        color: #fff;
+      }
+
+      .sidebar a.active {
+        background: #fff;
+        color: #061433;
+        font-weight: 600;
+      }
+
+      /* MAIN (WHITE AREA) */
+      .main {
+        flex: 1;
+        padding: 40px;
+        background: #ffffff;
+      }
+
+      .main h1 {
+        margin-bottom: 25px;
+        font-size: 28px;
+      }
+
+      /* PANEL CARD */
+      .panel {
+        background: #f1f5f9;
+        padding: 25px;
+        border-radius: 12px;
+        max-width: 500px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      /* INPUTS */
+      .panel select,
+      .panel input {
+        padding: 12px;
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+        font-size: 15px;
+        outline: none;
+      }
+
+      /* BUTTONS */
+      .panel button {
+        padding: 12px;
+        border: none;
+        border-radius: 8px;
+        font-size: 15px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      /* STOCK IN */
+      .panel button:first-of-type {
+        background: #22c55e;
+        color: white;
+      }
+
+      .panel button:first-of-type:hover {
+        background: #16a34a;
+      }
+
+      /* STOCK OUT */
+      .panel button:last-of-type {
+        background: #ef4444;
+        color: white;
+      }
+
+      .panel button:last-of-type:hover {
+        background: #dc2626;
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 768px) {
+        .layout {
+          flex-direction: column;
+        }
+
+        .sidebar {
+          width: 100%;
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+        }
+
+        .sidebar h2 {
+          display: none;
+        }
+
+        .sidebar a {
+          margin: 0;
+        }
+
+        .main {
+          padding: 20px;
+        }
+      }
+    </style>
   </head>
 
   <body>

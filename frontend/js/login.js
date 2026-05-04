@@ -220,7 +220,7 @@ function logout() {
   sessionStorage.clear();
 
   // Redirect to login
-  window.location.href = "login.html";
+  window.location.href = "index.html";
 }
 
 // Override basic login with enhanced version

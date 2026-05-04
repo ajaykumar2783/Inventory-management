@@ -3,7 +3,7 @@ let allMaterials = []; // Store all materials for search
 
 // Check login on page load
 if (!checkLogin()) {
-  window.location.href = "login.html";
+  window.location.href = "index.html";
 }
 
 // Get current user role
@@ -141,7 +141,7 @@ function loadProductTable(data) {
   allMaterials = []; // Reset
   
   if (!data.material_names || data.material_names.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">No products available</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;">No products available</td></tr>';
     return;
   }
 
@@ -152,6 +152,7 @@ function loadProductTable(data) {
 
     // Store material data for search
     allMaterials.push({
+      id: data.material_ids[i],
       name: data.material_names[i],
       type: "Material",
       quantity: data.material_quantities[i],
@@ -165,6 +166,10 @@ function loadProductTable(data) {
         <td>${data.material_quantities[i]}</td>
         <td>₹${data.material_values[i]}</td>
         <td><span class="badge ${status}">${status}</span></td>
+        <td class="action-buttons">
+          <button class="edit-btn" onclick="editMaterial(${data.material_ids[i]})" title="Edit">✏️</button>
+          <button class="delete-btn" onclick="deleteMaterial(${data.material_ids[i]}, '${data.material_names[i]}')}" title="Delete">🗑️</button>
+        </td>
       </tr>
     `;
   }
@@ -284,7 +289,7 @@ function initSearch() {
       );
 
       if (filtered.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color: #ef4444;">No products found matching "${searchTerm}"</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color: #ef4444;">No products found matching "${searchTerm}"</td></tr>`;
       } else {
         filtered.forEach(material => {
           tbody.innerHTML += generateMaterialRow(material);
@@ -302,12 +307,56 @@ function generateMaterialRow(material) {
       <td>${material.type}</td>
       <td>${material.quantity}</td>
       <td><span class="status ${material.status}">${material.status}</span></td>
-      <td>
-        <button class="btn small edit-btn" onclick="editMaterial('${material.name}')">Edit</button>
-        <button class="btn small delete-btn" onclick="deleteMaterial('${material.name}')">Delete</button>
+      <td class="action-buttons">
+        <button class="edit-btn" onclick="editMaterial(${material.id})" title="Edit">✏️</button>
+        <button class="delete-btn" onclick="deleteMaterial(${material.id}, '${material.name}')" title="Delete">🗑️</button>
       </td>
     </tr>
   `;
+}
+
+function editMaterial(materialId) {
+  // Check permission
+  const role = localStorage.getItem("userRole") || "user";
+  if (role === "user") {
+    alert("You don't have permission to edit materials. Only admins can edit.");
+    return;
+  }
+  
+  // Redirect to edit page with material ID as query parameter
+  window.location.href = `edit-material.html?id=${materialId}`;
+}
+
+async function deleteMaterial(materialId, materialName) {
+  // Check permission
+  const role = localStorage.getItem("userRole") || "user";
+  if (role === "user") {
+    alert("You don't have permission to delete materials. Only admins can delete.");
+    return;
+  }
+  
+  if (!confirm(`Are you sure you want to delete "${materialName}"?`)) {
+    return;
+  }
+  
+  try {
+    const response = await fetch(`${API_BASE}/materials/${materialId}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+      }
+    });
+    
+    if (!response.ok) {
+      throw new Error('Failed to delete material');
+    }
+    
+    alert('Material deleted successfully!');
+    loadDashboard(); // Reload the dashboard
+  } catch (error) {
+    console.error('Delete error:', error);
+    alert('Error deleting material: ' + error.message);
+  }
 }
 
 document.getElementById("refreshBtn")?.addEventListener("click", loadDashboard);

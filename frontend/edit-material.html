@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Edit Product</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <script>
+      if (!localStorage.getItem("loggedIn")) {
+        window.location.href = "index.html";
+      }
+    </script>
+
+    <div class="layout">
+      <aside class="sidebar">
+        <h2>📦 Inventory</h2>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="materials.html">Products</a>
+        <a href="stock.html">Stock</a>
+        <a href="suppliers.html">Suppliers</a>
+        <a href="reports.html">Reports</a>
+        <a href="audit_logs.html">Alerts</a>
+      </aside>
+
+      <main class="main">
+        <div class="topbar">
+          <div>
+            <h1>Edit Product</h1>
+            <p>Update material/product details</p>
+          </div>
+          <a href="materials.html" class="add-btn">Back</a>
+        </div>
+
+        <div class="panel">
+          <form id="materialForm" class="material-form">
+            <div class="form-grid">
+              <div>
+                <label>Material Name</label>
+                <input type="text" id="material_name" required />
+              </div>
+
+              <div>
+                <label>Material Type</label>
+                <select id="material_type" required>
+                  <option value="">Select Type</option>
+                  <option value="Inner Pages">Inner Pages</option>
+                  <option value="Outer Pages">Outer Pages</option>
+                  <option value="Ink">Ink</option>
+                  <option value="Shared Material">Shared Material</option>
+                </select>
+              </div>
+
+              <div>
+                <label>Unit</label>
+                <input
+                  type="text"
+                  id="unit"
+                  placeholder="ream / kg / litre"
+                  required
+                />
+              </div>
+
+              <div>
+                <label>Quantity</label>
+                <input type="number" id="quantity" step="0.01" required />
+              </div>
+
+              <div>
+                <label>Minimum Stock</label>
+                <input type="number" id="min_stock" step="0.01" required />
+              </div>
+
+              <div>
+                <label>Unit Price</label>
+                <input type="number" id="unit_price" step="0.01" required />
+              </div>
+
+              <div>
+                <label>Supplier</label>
+                <select id="supplier_id">
+                  <option value="">Select Supplier</option>
+                </select>
+              </div>
+
+              <div>
+                <label>Remarks</label>
+                <input type="text" id="remarks" />
+              </div>
+            </div>
+
+            <button type="submit" class="submit-btn">Update Product</button>
+          </form>
+        </div>
+      </main>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/edit-material.js"></script>
+  </body>
+</html>

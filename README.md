@@ -90,7 +90,7 @@ inventory-management/
 │       └── reports.py      # Reports APIs
 │
 ├── frontend/
-│   ├── login.html
+│   ├── index.html
 │   ├── dashboard.html
 │   ├── materials.html
 │   ├── suppliers.html

@@ -7,7 +7,7 @@ async function checkAuth() {
     });
 
     if (!res.ok) {
-      window.location.href = "login.html";
+      window.location.href = "index.html";
       return;
     }
 
@@ -15,7 +15,7 @@ async function checkAuth() {
     localStorage.setItem("userRole", user.role);
     localStorage.setItem("userName", user.username);
   } catch (error) {
-    window.location.href = "login.html";
+    window.location.href = "index.html";
   }
 }
 
@@ -27,5 +27,5 @@ async function logout() {
 
   localStorage.clear();
   sessionStorage.clear();
-  window.location.href = "login.html";
+  window.location.href = "index.html";
 }

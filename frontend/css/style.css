@@ -315,6 +315,34 @@ th {
   color: #dc2626;
 }
 
+/* ACTION BUTTONS */
+.action-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.edit-btn,
+.delete-btn {
+  padding: 6px 10px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s;
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.edit-btn:hover {
+  background: #6366f1;
+  color: white;
+}
+
+.delete-btn:hover {
+  background: #ef4444;
+  color: white;
+}
+
 /* LOGIN */
 .login-body {
   display: flex;
@@ -655,7 +683,7 @@ th {
 }
 
 .logout-btn {
-  background: #ef4444;
+  /* background: #ef4444; */
   color: white;
   border: none;
   padding: 10px 18px;
@@ -994,7 +1022,7 @@ th {
   }
 }
 .logout-btn {
-  background: linear-gradient(90deg, #ef4444, #dc2626);
+  background: linear-gradient(90deg, hsl(248, 83%, 19%), #130e4f);
   width: 100px;
   color: white;
   border: none;
